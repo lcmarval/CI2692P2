@@ -21,13 +21,14 @@ public class DfsVisita{
 		d = new Hashtable<String,Integer>();
 		f = new Hashtable<String,Integer>();
 		cola = new LinkedList<Vertice>();
+		tiempo = 0;
 	}
 
 	public void llamadaDfsV(Grafo g){
 		// inicializacion tablas
 		for (Vertice v : g.vertices()){
 			color.put(v.getId(), "blanco");
-			p.put(v.getId(), null);
+			p.put(v.getId(), "-");
 		}
 		// llamada DfsV
 		for (Vertice v : g.vertices()){
@@ -37,15 +38,16 @@ public class DfsVisita{
 		}
 	}
 
-	public void llamadaDfsV2(Grafo g, LinkedList cola){
+	public void llamadaDfsV2(Grafo g, LinkedList<Vertice> cola){
 	// llamada especial que toma en cuenta el ultimo en 
 		// inicializacion tablas
 		for (Vertice v : g.vertices()){
 			color.put(v.getId(), "blanco");
-			p.put(v.getId(), null);
+			p.put(v.getId(), "-");
 		}
 		// llamada DfsV
 		while (!cola.isEmpty()){
+			//String vId = cola.remove();
 			Vertice v = cola.remove();
 			if (color.get(v.getId()).equals("blanco")){
 				DfsV(v); 
