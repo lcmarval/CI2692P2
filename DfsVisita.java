@@ -5,18 +5,22 @@
  * @author Luis Marval. Carnet: 12-10620
  */
 
+import java.util.*;
+
 public class DfsVisita{
-	public HashTable<String, String> p;  // id, id
-	public HashTable<String, String> color;  // id, color
-	public HashTable<String, int> d; // id, tiempo
-	public HashTable<String, int> f; // id, tiempo
+	public Hashtable<String,String> p;  // id, id
+	public Hashtable<String,String> color;  // id, color
+	public Hashtable<String,Integer> d; // id, tiempo
+	public Hashtable<String,Integer> f; // id, tiempo
+	public LinkedList<Vertice> cola;
+	public int tiempo;
 
 	public DfsVisita(){
-		p = new HashTable<String, String>();
-		color = new HashTable<String, String>(); 
-		d = new HashTable<String, int>();
-		f = new HashTable<String, int>()
-		int tiempo = 0;
+		p = new Hashtable<String,String>();
+		color = new Hashtable<String,String>(); 
+		d = new Hashtable<String,Integer>();
+		f = new Hashtable<String,Integer>();
+		cola = new LinkedList<Vertice>();
 	}
 
 	public void llamadaDfsV(Grafo g){
@@ -27,7 +31,23 @@ public class DfsVisita{
 		}
 		// llamada DfsV
 		for (Vertice v : g.vertices()){
-			if color.get(v.getId()).equals("blanco"){
+			if (color.get(v.getId()).equals("blanco")){
+				DfsV(v); 
+			}
+		}
+	}
+
+	public void llamadaDfsV2(Grafo g, LinkedList cola){
+	// llamada especial que toma en cuenta el ultimo en 
+		// inicializacion tablas
+		for (Vertice v : g.vertices()){
+			color.put(v.getId(), "blanco");
+			p.put(v.getId(), null);
+		}
+		// llamada DfsV
+		while (!cola.isEmpty()){
+			Vertice v = cola.remove();
+			if (color.get(v.getId()).equals("blanco")){
 				DfsV(v); 
 			}
 		}
@@ -37,8 +57,8 @@ public class DfsVisita{
 		tiempo = tiempo + 1;
 		d.put(v.getId(), tiempo);
 		color.put(v.getId(), "gris");
-		for (Vertice w : v.adyacentes()){
-			if color.get(w.getId()).equals("blanco"){
+		for (Vertice w : v.adyacentes){
+			if (color.get(w.getId()).equals("blanco")){
 				p.put(w.getId(), v.getId());
 				DfsV(w);
 			}
@@ -46,21 +66,25 @@ public class DfsVisita{
 		color.put(v.getId(), "negro");
 		tiempo = tiempo + 1;
 		f.put(v.getId(), tiempo);
+		cola.add(v);
 	}
 
-	public HashTable<String, String> obtenerPre(){
+	public Hashtable<String, String> obtenerPre(){
 		return p;
 	}
 
-	public HashTable<String, String> obtenerColor(){
+	public Hashtable<String, String> obtenerColor(){
 		return color;
 	}
 
-	public HashTable<String, int> obtenerTiempoI(){
+	public Hashtable<String, Integer> obtenerTiempoI(){
 		return d;
 	}
 
-	public HashTable<String, int> obtenerTiempoF(){
+	public Hashtable<String, Integer> obtenerTiempoF(){
 		return f;
+	}
+	public LinkedList<Vertice> obtenerCola(){
+		return cola;
 	}
 }

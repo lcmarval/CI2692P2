@@ -11,9 +11,12 @@ public class FuertementeConexa{
 	public FuertementeConexa(){
 		a = new DfsVisita();
 	}
-	public Void algoritmo(Grafo g){
+	public void algoritmo(Digrafo g){
 		a.llamadaDfsV(g);
-		g2 = g.simetria();
-		a.llamadaDfsV(g2); // llamada especial falta crear la llamada
+		Digrafo g2 = g.simetria();
+		LinkedList<Vertice> colaG = a.obtenerCola();
+		a.llamadaDfsV2(g2, colaG);
+		
+	
 	}
 }
