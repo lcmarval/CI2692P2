@@ -14,6 +14,6 @@ public class FuertementeConexa{
 	public Void algoritmo(Grafo g){
 		a.llamadaDfsV(g);
 		g2 = g.simetria();
-		a.llamadaDfsV(g2);
+		a.llamadaDfsV(g2); // llamada especial falta crear la llamada
 	}
 }

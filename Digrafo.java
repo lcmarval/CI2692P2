@@ -875,9 +875,12 @@ public class Digrafo implements Grafo
             nvo.agregarVertice(v);
         }
         for (int i=0; i<g.arcos().size(); i++){
-            // obtener arco(i)
-            // obtener componentes de arco ( id, peso, vi, vf)
-            // agregar arco a nvo
+            Arco a = arcos.get(i) // obtener arco(i)
+            String aId = a.getId();     // obtener componentes de arco ( id, peso, vi, vf)
+            double aPeso = a.getPeso();
+            Vertice aVi = a.getExtremoInicial();
+            Vertice aVf = a.getExtremoFinal();
+            nvo.agregarArco(aId, aPeso, aVi, aVf); // agregar arco a nvo
         }
         return nvo;
     }  
