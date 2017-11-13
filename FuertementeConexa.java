@@ -15,11 +15,13 @@ public class FuertementeConexa{
 	}
 	public void algoritmo(Digrafo g){
 		a.llamadaDfsV(g);
-		Hashtable<String, Integer> tiempo1 = a.obtenerTiempoI();
-		System.out.println(tiempo1.toString());
-		Digrafo g2 = g.simetria();
-		LinkedList<Vertice> colaG = a.obtenerCola();
-		a.llamadaDfsV2(g2, colaG);
+		//Hashtable<String, String> pre = a.obtenerPre();
+		//System.out.println(pre.toString());
+		//Hashtable<String, Integer> tiempo1 = a.obtenerTiempoI();
+		//System.out.println(tiempo1.toString());
+		//Digrafo g2 = g.simetria();
+		//LinkedList<Vertice> colaG = a.obtenerCola();
+		//a.llamadaDfsV2(g2, colaG);
 		// output arboles dfs (componentes fuertemente conexas)
 		
 	

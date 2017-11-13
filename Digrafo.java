@@ -58,7 +58,12 @@ public class Digrafo implements Grafo
                     mat[i][j] = Integer.parseInt(datos[j]);
                     id = "(" + String.valueOf(i) + "," + String.valueOf(j) + ")";
                     int altura = mat[i][j];
-                    Vertice v = new Vertice(id, altura);
+                    Vertice v = new Vertice(id,altura);
+                    if (i == 0 || j == 0 || i == n-1 || j == m-1){
+                        v.setEstado("0");
+                    }else{
+                        v.setEstado("x");
+                    }
                     vertices.add(v);
                 }
             }
@@ -86,6 +91,7 @@ public class Digrafo implements Grafo
                         id2 = "(" + String.valueOf(i) + "," + String.valueOf(j+1) + ")";
                         id3 = "[" + id1 + id2 + "]";
                         agregarArco(id3,0,id1,id2);
+
                     }
 
                     if(mat[i+1][j] <= mat[i][j]){ // abajo
@@ -466,7 +472,7 @@ public class Digrafo implements Grafo
 * Parametros de salida:
 * @throws arcos: tipo Lista de Arco, lista con los lados del grafo
 */
-    public List<Lado> lados() {
+    public LinkedList<Lado> lados() {
         LinkedList<Lado> lados2 = new LinkedList();
         for (int i=0;i<arcos.size();i++){
             lados2.add(arcos.get(i));
@@ -587,6 +593,34 @@ public class Digrafo implements Grafo
         return salida;
     }
 
+/**
+* toStringMatriz:
+* Devuelve una representacion del contenido del grafo como una cadena de caracteres
+* Parametros de entrada:
+* @param g: grafo
+* Parametros de salida:
+* @throws : tipo String, representacion del contenido del grafo en cadena de caracateres
+*/
+    public String toStringMatriz() {
+        String newLine = "\n";
+        String space = " ";
+        String salida = "";
+
+
+        salida = salida + String.valueOf(vertices.size()) + newLine + String.valueOf(arcos.size()) + newLine;
+        int j = 0;
+        int k = 0;
+        for(int i=0; i<mat.length; i++){
+            salida = salida + newLine;
+            k = 0;
+            while(k < mat[0].length){
+                salida = salida + vertices.get(j).getEstado() + space;
+                k++;
+                j++;
+            }
+        }
+        return salida;
+    }
 /**
 * estaArco:
 * Verifica que el arco con identificador id pertenezca al grafo

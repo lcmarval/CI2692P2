@@ -14,6 +14,7 @@ public class Vertice
   public LinkedList<Vertice> adyacentes;
   public LinkedList<Vertice> predecesores;
   public LinkedList<Vertice> sucesores;
+  private String estado;
 
 /** 
  * Vertice:
@@ -54,6 +55,30 @@ public class Vertice
 */ 
   public String getId() {
   	return id;
+  }
+
+/** 
+ * setEstado:
+ * Devuelve el id del vertice
+ * Parametros de entrada: 
+ * @param vertice: tipo Vertice
+ * Parametros de salida:
+ * @throws id: tipo int, id del vertice
+*/ 
+  public void setEstado(String nuevo){
+    estado = nuevo;
+  }
+
+  /** 
+ * getEstado:
+ * Devuelve el id del vertice
+ * Parametros de entrada: 
+ * @param vertice: tipo Vertice
+ * Parametros de salida:
+ * @throws id: tipo int, id del vertice
+*/ 
+  public String getEstado(){
+    return estado;
   }
 
 /**
