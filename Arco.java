@@ -15,9 +15,9 @@ public class Arco extends Lado
  * Crea un arco con identificador, peso, vertice extremo inicial y vertice extremo final del arco
  * Parametros de entrada: 
  * @param id: tipo String, identificador del arco
- * @param peso: tipo Double, peso del arco
- * @param vi: objeto tipo Vertice, vertice extremo inicial del arco 
- * @param vf: objeto tipo Vertice, vertice extremo final del arco 
+ * @param peso: tipo int, peso del arco
+ * @param extremoInicial: objeto tipo Vertice, vertice extremo inicial del arco 
+ * @param extremoFinal: objeto tipo Vertice, vertice extremo final del arco 
  * Parametros de salida:
  * @throws arco: objeto Arco
 */ 

@@ -59,23 +59,21 @@ public class Vertice
 
 /** 
  * setEstado:
- * Devuelve el id del vertice
+ * modifica el estado del vertice
  * Parametros de entrada: 
- * @param vertice: tipo Vertice
- * Parametros de salida:
- * @throws id: tipo int, id del vertice
+ * @param nuevo: tipo String, nuevo estado del Vertice
 */ 
   public void setEstado(String nuevo){
     estado = nuevo;
   }
 
-  /** 
+ /** 
  * getEstado:
- * Devuelve el id del vertice
+ * retorna el estado del Vertice
  * Parametros de entrada: 
- * @param vertice: tipo Vertice
- * Parametros de salida:
- * @throws id: tipo int, id del vertice
+ * @param Vertice: tipo Vertice
+ * Parametro de salida:
+ * @throws estado: tipo String
 */ 
   public String getEstado(){
     return estado;

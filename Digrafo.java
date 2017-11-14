@@ -30,7 +30,7 @@ public class Digrafo implements Grafo
 * Carga la información almacenada en un archivo de texto para crear un grafo.
 * Parametros de entrada:
 * @param g: grafo.
-* @param dirArchivo: Nombre(direccion) del archivo con informacion.
+* @param dirArchivo: Nombre(direccion) del archivo con informacion tipo String.
 * Parametros de salida:
 * @throws boolean: true en caso de cargar exitosamente el grafo, false en caso contrario.
 */
@@ -329,7 +329,7 @@ public class Digrafo implements Grafo
 */     
     public boolean agregarVertice(Vertice v) {
 
-        if(vertices.size() == 0) {
+        if(this.numeroDeVertices() == 0) {
             vertices.add(v);
             return true;
         }
@@ -350,7 +350,7 @@ public class Digrafo implements Grafo
 * Parametros de entrada:
 * @param g: grafo
 * @param id: tipo String, identificador del vertice
-* @param peso: tipo Double, peso del vertice
+* @param peso: tipo int, peso del vertice
 * Parametros de salida:
 * @throws boolean: true, en caso de agregar el vertice de manera exitosa; false, en caso contrario
 */
@@ -360,7 +360,7 @@ public class Digrafo implements Grafo
             return false;
         }
 
-        if(vertices.size() == 0) {
+        if(this.numeroDeVertices() == 0) {
             Vertice v = new Vertice(id, peso);
             vertices.add(v);
             return true;
@@ -381,7 +381,7 @@ public class Digrafo implements Grafo
 * @throws Vertice: objeto tipo Vertice
 */   
     public Vertice obtenerVertice(String id) {
-        for(int i=0; i<vertices.size(); i++){
+        for(int i=0; i<this.numeroDeVertices() ; i++){
             if(vertices.get(i).getId().equals(id)){
                 return vertices.get(i);
             }
@@ -399,7 +399,7 @@ public class Digrafo implements Grafo
 * @throws boolean: true, en caso de que el vertice exista en el grafo; false, en caso contrario
 */
     public boolean estaVertice(String id) {
-        for(int i=0; i<vertices.size(); i++){
+        for(int i=0; i<this.numeroDeVertices(); i++){
             if (vertices.get(i).getId().equals(id)){
                 return true;
             }
@@ -417,7 +417,7 @@ public class Digrafo implements Grafo
 * @throws boolean: true, en caso de que el lado pertenezca al grafo; false, en caso contrario
 */
     public boolean estaLado(String u, String v){
-        for(int i=0; i<arcos.size(); i++){
+        for(int i=0; i<this.numeroDeLados(); i++){
             if (arcos.get(i).getExtremoInicial().equals(u) && arcos.get(i).getExtremoFinal().equals(v)){
                 return true;
             }
@@ -441,7 +441,7 @@ public class Digrafo implements Grafo
 
             // Debo eliminar los arcos incidentes al vertive eliminar
             // Busco el arco
-            for(int i=0;i<arcos.size();i++){
+            for(int i=0;i<this.numeroDeLados();i++){
                 if(arcos.get(i).getExtremoInicial().getId().equals(eliminar.getId()) || arcos.get(i).getExtremoFinal().getId().equals(eliminar.getId())){
                     this.eliminarArco(arcos.get(i).getId());
                 }
@@ -470,11 +470,11 @@ public class Digrafo implements Grafo
 * Parametros de entrada:
 * @param g: grafo
 * Parametros de salida:
-* @throws arcos: tipo Lista de Arco, lista con los lados del grafo
+* @throws lados: tipo Lista de Lado, lista con los arcos del grafo
 */
     public LinkedList<Lado> lados() {
         LinkedList<Lado> lados2 = new LinkedList();
-        for (int i=0;i<arcos.size();i++){
+        for (int i=0;i<this.numeroDeLados();i++){
             lados2.add(arcos.get(i));
         }
         return lados2;
@@ -549,10 +549,10 @@ public class Digrafo implements Grafo
 */
     public Digrafo clone() {
         Digrafo nvoDiGrafo = new Digrafo();
-        for (int i=0; i<vertices.size(); i++) {
+        for (int i=0; i<this.numeroDeVertices(); i++) {
             nvoDiGrafo.agregarVertice(vertices.get(i));
         }
-        for (int j=0; j<arcos.size(); j++) {
+        for (int j=0; j<this.numeroDeLados(); j++) {
             nvoDiGrafo.agregarArco(arcos.get(j));
         }
         
@@ -570,13 +570,13 @@ public class Digrafo implements Grafo
     public String toString() {
         String newLine = "\n";
         String salida = "";
-        salida = salida + String.valueOf(vertices.size()) + newLine + String.valueOf(arcos.size()) + newLine;
+        salida = salida + String.valueOf(this.numeroDeVertices()) + newLine + String.valueOf(this.numeroDeLados()) + newLine;
         // guardar vertices en salida
-        for(int i=0; i<vertices.size(); i++){
+        for(int i=0; i<this.numeroDeVertices(); i++){
                 salida = salida + vertices.get(i).toString() + newLine;
                 }
         // guardar lados en salida
-        for(int i=0; i<arcos.size(); i++){
+        for(int i=0; i<this.numeroDeLados(); i++){
                 salida = salida + arcos.get(i).toString() + newLine;
                 }
         // guardar salida a archivo
@@ -595,7 +595,7 @@ public class Digrafo implements Grafo
 
 /**
 * toStringMatriz:
-* Devuelve una representacion del contenido del grafo como una cadena de caracteres
+* Devuelve una representacion de la matriz asociada al grafo como una cadena de caracteres
 * Parametros de entrada:
 * @param g: grafo
 * Parametros de salida:
@@ -605,9 +605,6 @@ public class Digrafo implements Grafo
         String newLine = "\n";
         String space = " ";
         String salida = "";
-
-
-        salida = salida + String.valueOf(vertices.size()) + newLine + String.valueOf(arcos.size()) + newLine;
         int j = 0;
         int k = 0;
         for(int i=0; i<mat.length; i++){
@@ -631,7 +628,7 @@ public class Digrafo implements Grafo
 * @throws boolean: true, en caso de que el arco pertenezca al grafo; false, en caso contrario
 */
      public boolean estaArco(String id){
-        for(int i=0; i<arcos.size(); i++){
+        for(int i=0; i<this.numeroDeLados(); i++){
             if (arcos.get(i).getId().equals(id)){
                 return true;
             }
@@ -654,7 +651,7 @@ public class Digrafo implements Grafo
         x = a.getExtremoInicial();
         y = a.getExtremoFinal();
 
-        if(arcos.size() == 0){
+        if(this.numeroDeLados() == 0){
             //Verificamos si los extremos de el arco estan en la lista de vertices
             if(this.estaVertice(x.getId()) && this.estaVertice(y.getId())){
                 arcos.addFirst(a);
@@ -699,7 +696,7 @@ public class Digrafo implements Grafo
 */
     public boolean agregarArco(String id, int peso, String eInicial, String eFinal){
         
-        if(arcos.size() == 0){
+        if(this.numeroDeLados() == 0){
             //Verificamos si los extremos de el arco estan en la lista de vertices
             if(this.estaVertice(eInicial) && this.estaVertice(eFinal)){
                 Vertice vertF = obtenerVertice(eFinal);
@@ -838,37 +835,12 @@ public class Digrafo implements Grafo
 * @throws Arco: objeto tipo Arco, en caso de que el arco exista en el grafo; NoSuchElementException error, en caso contrario
 */
     public Arco obtenerArco(String id) {
-        for(int i=0; i<arcos.size(); i++){
+        for(int i=0; i<this.numeroDeLados(); i++){
             if(arcos.get(i).getId().equals(id)){
                 return arcos.get(i);
             }
         }
         throw new NoSuchElementException();
     }
-
-/**
-* simetria:
-* Le aplica operaciones al grafo para hacer le simetria
-* Parametros de entrada:
-* @param g: grafo
-* Parametros de salida:
-* void
-*/
-    public Digrafo simetria() {
-        Digrafo nvo = new Digrafo();
-        for (Vertice v : this.vertices()){
-            // mismos vertices
-            nvo.agregarVertice(v);
-        }
-        for (int i=0; i<this.arcos.size(); i++){
-            Arco a = arcos.get(i); // obtener arco(i)
-            String aId = a.getId();     // obtener componentes de arco ( id, peso, vi, vf)
-            int aPeso = a.getPeso();
-            Vertice aVi = a.getExtremoInicial();
-            Vertice aVf = a.getExtremoFinal();
-            nvo.agregarArco(aId, aPeso, aVf.getId(), aVi.getId()); // agregar arco a nvo
-        }
-        return nvo;
-    }  
 
 }
