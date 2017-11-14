@@ -10,6 +10,9 @@ import java.util.*;
 public class DfsVisita{
 	public Hashtable<String,String> p;  // id, id
 	public Hashtable<String,String> color;  // id, color
+	private int suma;
+	private LinkedList<Vertice> alturas;	// lista para medir alturas
+
 
 /** 
  * DfsVisita:
@@ -17,7 +20,10 @@ public class DfsVisita{
 */ 
 	public DfsVisita(){
 		p = new Hashtable<String,String>();
-		color = new Hashtable<String,String>(); 
+		color = new Hashtable<String,String>();
+		alturas = new LinkedList<Vertice>(); 
+		suma = 0;
+
 	}
 /** 
  * llamadaDfsV:
@@ -38,6 +44,21 @@ public class DfsVisita{
 			if (color.get(v.getId()).equals("blanco")){
 				DfsV(v); 
 			}
+			if (!alturas.isEmpty()){
+				int mayorInm = v.sucesores.get(0).getAltura();
+				for (Vertice w: alturas){
+					for (Vertice u: w.sucesores){
+						if (u.getAltura() < mayorInm && u.getAltura() > w.getAltura()){
+							mayorInm = u.getAltura();
+						}
+					}
+				}
+				System.out.println(" MA alto menor:" + String.valueOf(mayorInm));
+				for(Vertice z: alturas){
+					suma = suma + (mayorInm - z.getAltura());
+				}
+				alturas.clear();
+			}
 		}
 	}
 
@@ -51,9 +72,11 @@ public class DfsVisita{
  * @throws color: Tabla de Hash
 */ 
 	public String DfsV(Vertice v){
+
 		if (v.getEstado().equals("0")){
 			return v.getEstado();
 		}
+		alturas.add(v);
 		color.put(v.getId(), "gris");
 		String estadoActual = v.getEstado();
 		for (Vertice w : v.predecesores){
@@ -66,9 +89,14 @@ public class DfsVisita{
 			}
 		}
 		v.setEstado(estadoActual);
+		if (v.getEstado().equals("x")){
+			alturas.add(v);
+		}
 		color.put(v.getId(), "negro");
 		return estadoActual;
 	}
+
+
 /** 
  * obtenerPre:
  * funcion que retorna los predecesores
@@ -80,6 +108,19 @@ public class DfsVisita{
 	public Hashtable<String, String> obtenerPre(){
 		return p;
 	}
+
+/** 
+ * obtenerPre:
+ * funcion que retorna los predecesores
+ * Parametros de entrada: 
+ * void
+ * Parametros de salida:
+ * @throws p: Tabla de Hash
+*/ 
+	public int suma(){
+		return suma;
+	}
+
 /** 
  * obtenerColor:
  * funcion que retorna los predecesores

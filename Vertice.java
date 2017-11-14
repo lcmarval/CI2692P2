@@ -41,7 +41,7 @@ public class Vertice
  * Parametros de salida:
  * @throws altura: tipo Double, altura del vertice
 */ 
-  public double getAltura() {
+  public int getAltura() {
   	return altura;
   }
 

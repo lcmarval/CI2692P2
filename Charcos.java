@@ -12,8 +12,10 @@ public class Charcos{
 	public static void main(String[] args){
 		Digrafo g = new Digrafo();
 		boolean success = g.cargarGrafo(args[0]);
-		int resultado = ;
-		System.out.println("El volumen es igual a " + String.valueOf(resultado) + " metros cubicos");
+		DfsVisita a = new DfsVisita();
+		a.llamadaDfsV(g);
+		//int resultado = a.llamadaDfsV2(g);;
+		System.out.println("El volumen es igual a " + String.valueOf(a.suma()) + " metros cubicos");
 
 	}
 }
